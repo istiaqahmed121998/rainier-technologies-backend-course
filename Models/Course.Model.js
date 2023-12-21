@@ -15,10 +15,17 @@ const Course = sequelize.define('course', {
     },
     description: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     price: {
         type: DataTypes.DOUBLE,
+        set(val) {
+            if (val===null) {
+                this.setDataValue('price', 0.0);
+            } else {
+                this.setDataValue('price', parseFloat(val));
+            }
+        },
         get() {
             if (this.getDataValue('price') === null || this.getDataValue('price') === undefined) {
                 return "0 BDT";
@@ -26,9 +33,17 @@ const Course = sequelize.define('course', {
                 return `${this.getDataValue('price')} BDT`;
             }
         },
+        allowNull: true,
     },
     duration: {
         type: DataTypes.DOUBLE,
+        set(val) {
+            if (val===null) {
+                this.setDataValue('duration', 0.0);
+            } else {
+                this.setDataValue('duration', parseFloat(val));
+            }
+        },
         get() {
             if (this.getDataValue('duration') === null || this.getDataValue('duration') === undefined) {
                 return "0 Week";
@@ -36,13 +51,14 @@ const Course = sequelize.define('course', {
                 return `${this.getDataValue('duration')} week`;
             }
         },
+        allowNull: true,
     },
     level: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: true,
     },
     topics: {
         type: Sequelize.STRING,
-        allowNull: false,
         get() {
             if (this.getDataValue('topics') === null || this.getDataValue('topics') === undefined) {
                 return [];
@@ -57,6 +73,7 @@ const Course = sequelize.define('course', {
                 this.setDataValue('topics', val.join(';'));
             }
         },
+        allowNull: true,
     }
 }, {
     // Other model options go here

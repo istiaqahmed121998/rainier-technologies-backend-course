@@ -9,13 +9,10 @@ const Schedule = sequelize.define('schedule', {
     },
     startDate: {
         type: DataTypes.DATE,
-        allowNull: false,
-        unique: true,
 
     },
     endDate:{
         type: DataTypes.DATE,
-        allowNull: false,
     },
     classDays:{
         type: Sequelize.STRING,
