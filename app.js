@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const config = require('./config')[process.env.NODE_ENV || 'development'];
 const sequelize = require("./helpers/init_database")
 const AuthRoute = require('./Routes/Auth.route')
+const CouseRoute = require('./Routes/Course.route')
+const ScheduleModel=require("./Models/Schedule.Model")
 const { verifyAccessToken } = require("./helpers/jwt_helper")
 const log = config.log();
 const app = express();
@@ -28,10 +30,10 @@ app.listen(port, () => {
     log.info("App listening on port " + port);
 });
 
-app.use('/api/v1/', AuthRoute)
+app.use('/api/', AuthRoute)
 
 app.use(verifyAccessToken)
-
+app.use('/api/course', CouseRoute)
 
 app.all('*', (req, res, next) => {
     const err = new Error(`Requested URL ${req.path} not found!`, 404);
