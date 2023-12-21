@@ -28,7 +28,7 @@ app.listen(port, () => {
     log.info("App listening on port " + port);
 });
 
-app.use('/api/v1/', AuthRoute)
+app.use('/api', AuthRoute)
 
 app.use(verifyAccessToken)
 

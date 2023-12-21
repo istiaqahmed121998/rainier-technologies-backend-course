@@ -72,17 +72,5 @@ module.exports = {
     }
   },
 
-  logout: async (req, res, next) => {
-    try {
-      const { refreshToken } = req.body
-      if (!refreshToken) {
-        const err = new Error('Bad Request');
-        err.statusCode = 401
-        next(err)
-      }
-      const userId = await verifyRefreshToken(refreshToken)
-    } catch (error) {
-      next(error)
-    }
-  },
+
 }

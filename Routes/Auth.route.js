@@ -9,5 +9,5 @@ router.post('/login',UserService.login)
 
 router.post('/refresh-token',UserService.refreshToken)
 
-router.delete('/logout',UserService.logout)
+
 module.exports=router;
